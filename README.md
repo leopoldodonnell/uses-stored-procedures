@@ -14,11 +14,12 @@ While stored procedures are *not the Rails way* they are an occasional project n
 
 Here's a simple example:
 
-    ```ruby
-    class MyClass < ActiveRecord::Base
-      use_stored_proc :get_office_by_country {|row| "#{row.country} #{row.city}, phone: #{row.phone}"}
-    end
-    ```
+```ruby
+class MyClass < ActiveRecord::Base
+  use_stored_proc :get_office_by_country {|row| "#{row.country} #{row.city}, phone: #{row.phone}"}
+end
+```
+
 Which generates:
 
     ```ruby
