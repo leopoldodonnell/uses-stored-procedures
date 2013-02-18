@@ -46,19 +46,18 @@ Note that the object passed to the block is a *UsesStoredProcedures#HashWithAttr
 The method signature for *use_stored_proc* is:
 
 ```ruby
-def self.use_stored_proc(sym_name, *options)
+def self.use_stored_proc(method_name, *options)
 ```
 
-That generates a class and instance method for the sym_name provided.
+That then generates a class and instance method named *method_name*.
 
-
-* sym_name - is the symbolic name of the stored procedure and is the name given to the generated class and instance methods. By default, the stored procedure that is called will be a stringified version of this sym_name. Use the :proc_name option if the sym_name won't be matching actual stored procedure name.
+* method_name - is the symbolic name of the stored procedure and is the name given to the generated class and instance methods. By default, the stored procedure that is called will be a stringified version of this method_name. Use the :proc_name option if the method_name won't be matching actual stored procedure name.
 
 * options - is an array of arguments that are provided as *:arg_name => value* and where the last argument may be a block, or method name.
 
 ####Options
 
-* proc_name - if the stored procedure name is different than sym_name paramter, provide a string that matches the actual stored procedure name.
+* proc_name - if the stored procedure name is different than method_name parameter, provide a string that matches the actual stored procedure name.
 
 * block | method - make the last parameter a block or method that receive an instance of *UsesStoredProcedures#HashWithAttributes* to map returned rows.
 
@@ -78,8 +77,12 @@ class ClientServices
 end
 
 client_services = ClientServices.new
+
 # ...
+
 client_list = client_services.list_inactive_clients(first_of_year) { |client| "<tr><td>#{client.name}</td><td>#{client.phone}</td><td>#{client.last_contact}</td></tr>"}
+
+# and so on ...
 ```
 
 ## Installation
