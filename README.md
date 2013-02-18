@@ -22,22 +22,22 @@ end
 
 Which generates:
 
-    ```ruby
-    def self.get_office_by_country(*args, &block)
-      # code
-    end
-  
-    def get_office_by_country(*args, &block)
-      self.class.get_offic_by_country(args, block)
-    end
-    ```   
+```ruby
+def self.get_office_by_country(*args, &block)
+  # code
+end
+
+def get_office_by_country(*args, &block)
+  self.class.get_offic_by_country(args, block)
+end
+```   
 
 So later you can do the following:
   
-    ```ruby
-    result = MyClass.get_office_by_country 'Canada'
-    result.each {|item| puts item}
-    ```
+```ruby
+result = MyClass.get_office_by_country 'Canada'
+result.each {|item| puts item}
+```
 
 Note that the object passed to the block is a *UsesStoredProcedures#HashWithAttributes* instance that provides accessors for all of its keys.
 
@@ -45,9 +45,9 @@ Note that the object passed to the block is a *UsesStoredProcedures#HashWithAttr
 
 The method signature for *use_stored_proc* is:
 
-    ```ruby
-    def self.use_stored_proc(sym_name, *options)
-    ```
+```ruby
+def self.use_stored_proc(sym_name, *options)
+```
 
 That generates a class and instance method for the sym_name provided.
 
@@ -68,19 +68,20 @@ The generated methods all take a variable number of parameters that are mapped t
 
 ### Another Example
 
-    ```ruby
-    require 'uses_stored_procedures'
-    
-    class ClientServices
-      include UsesStoredProcedures
-      
-      use_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS'
-    end
-    
-    client_services = ClientServices.new
-    # ...
-    client_list = client_services.list_inactive_clients(first_of_year) { |client| "<tr><td>#{client.name}</td><td>#{client.phone}</td><td>#{client.last_contact}</td></tr>"}
-    ```
+```ruby
+require 'uses_stored_procedures'
+
+class ClientServices
+  include UsesStoredProcedures
+  
+  use_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS'
+end
+
+client_services = ClientServices.new
+# ...
+client_list = client_services.list_inactive_clients(first_of_year) { |client| "<tr><td>#{client.name}</td><td>#{client.phone}</td><td>#{client.last_contact}</td></tr>"}
+```
+
 ## Installation
 
 In your Gemfile
