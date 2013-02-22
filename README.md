@@ -93,6 +93,8 @@ client_list = client_services.list_inactive_clients(first_of_year)
 
 ## Installation
 
+Note that at this time, the gem will support calling stored procedures for Mysql2, MySQL2, SQLServer and PostgreSQL.
+
 In your Gemfile
 
     gem 'uses-stored-procedures', git => "git://github.com/leopoldodonnell/uses-stored-procedures"

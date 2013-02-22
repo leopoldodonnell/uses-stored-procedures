@@ -17,6 +17,8 @@ END
         SELECT * FROM people WHERE name like in_name and zip_code = zip;
     END;
 END
+
+    #ActiveRecord::Base.connection.execute("mysql_options(&mysql, MYSQL_OPT_RECONNECT, &reconnect);")
     ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS people")
     ActiveRecord::Base.connection.execute("DROP PROCEDURE IF EXISTS test_proc")
     ActiveRecord::Base.connection.execute("DROP PROCEDURE IF EXISTS people_by_name_and_zip")
