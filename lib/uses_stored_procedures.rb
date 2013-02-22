@@ -7,24 +7,10 @@ module UsesStoredProcedures
     def uses_stored_proc(name, *args, &block)
       options   = args.extract_options!
       proc_name = options[:proc_name] || name.to_s
-
-      # Install variables dynamically to avoid adding it
-      # to ALL instances of ActiveRecord::Base
-      if ! self.respond_to?(:stored_proc_block)
-        class_attribute :stored_proc_block
-        class_attribute :proc_names
-        self.stored_proc_block = {}
-        self.proc_names = {}
-      end
       
-      # Install the class and instance methods
-      self.proc_names[name] = proc_name
-      define_method name do |*args| self.class.exec_stored_proc(proc_names[__method__], args) end
-      singleton_class = class << self; self; end
-      singleton_class.send(:define_method, name) do |*args| 
-        exec_stored_proc(proc_names[__method__], args) 
-      end
-      
+      self.init_class_attributes()
+      self.install_stored_proc_methods(name, proc_name)
+            
       # Install the row mapper block or method
       if block_given?      
         self.stored_proc_block[proc_name] = block
@@ -49,6 +35,25 @@ module UsesStoredProcedures
         else
           # Just map it 
           records.map do |r| HashWithAttributes.new.merge r end
+      end
+    end
+
+    # Install variables dynamically to avoid adding it
+    # to ALL instances of ActiveRecord::Base
+    def init_class_attributes()
+      return if self.respond_to?(:stored_proc_block)
+      class_attribute :stored_proc_block
+      class_attribute :proc_names
+      self.stored_proc_block = {}
+      self.proc_names = {}
+    end
+    
+    def install_stored_proc_methods(name, proc_name)
+      self.proc_names[name] = proc_name
+      define_method name do |*args| self.class.exec_stored_proc(proc_names[__method__], args) end
+      singleton_class = class << self; self; end
+      singleton_class.send(:define_method, name) do |*args| 
+        exec_stored_proc(proc_names[__method__], args) 
       end
     end
   end
