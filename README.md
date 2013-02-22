@@ -46,7 +46,7 @@ Note that the object passed to the block is a *UsesStoredProcedures#HashWithAttr
 The method signature for *use_stored_proc* is:
 
 ```ruby
-def self.use_stored_proc(method_name, *options)
+def self.use_stored_proc(method_name, *options, &block)
 ```
 
 That then generates a class and instance method named *method_name*.
@@ -59,7 +59,9 @@ That then generates a class and instance method named *method_name*.
 
 * proc_name - if the stored procedure name is different than method_name parameter, provide a string that matches the actual stored procedure name.
 
-* block | method - make the last parameter a block or method that receive an instance of *UsesStoredProcedures#HashWithAttributes* to map returned rows.
+* filter - the name of a class method that receives an instance of *UsesStoredProcedures#HashWithAttributes* to map returned rows.
+
+* block - make the last parameter a block that receive an instance of *UsesStoredProcedures#HashWithAttributes* to map returned rows.
 
 #### Generated Methods
 
@@ -73,14 +75,18 @@ require 'uses_stored_procedures'
 class ClientServices
   include UsesStoredProcedures
   
-  use_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS'
+  use_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS', :filter => :make_clients
+  
+  def self.make_clients(item)
+    Client.new item
+  end
 end
 
 client_services = ClientServices.new
 
 # ...
 
-client_list = client_services.list_inactive_clients(first_of_year) { |client| "<tr><td>#{client.name}</td><td>#{client.phone}</td><td>#{client.last_contact}</td></tr>"}
+client_list = client_services.list_inactive_clients(first_of_year)
 
 # and so on ...
 ```
