@@ -1,0 +1,10 @@
+test:
+  adapter: mysql2
+  database: test
+  username: foobar
+  encoding: utf8
+
+test_postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres

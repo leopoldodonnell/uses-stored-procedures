@@ -29,6 +29,7 @@ group :test do
   gem "rb-fsevent"
   gem "activerecord"
   gem "mysql2"
+  gem "ruby-pg"
 end
 # To use debugger
 # gem 'debugger'
