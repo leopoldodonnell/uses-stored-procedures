@@ -5,3 +5,10 @@ rvm:
   - 1.9.3
 env:
   - rails=3.2.9
+  - rails=3.1
+
+#services:
+#  - mysql
+
+before_script:
+  - mysql -e 'create database test;'

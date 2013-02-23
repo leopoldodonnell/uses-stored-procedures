@@ -8,7 +8,37 @@ Extends ActiveRecord with the ability to use SQL Stored Procedures in Rails.
 
 While stored procedures are *not the Rails way* they are an occasional project necessity. Your reasons may stem from a need to integrate with a legacy database with built-in business rules, or a need to improve performance where other avenues have been exhausted (given available project time). If you need this, *you know who you are*, I don't need to tell you why.
 
-## Description
+## Requirements
+
+### Ruby
+
+- 1.8.7, 1.9.2 or 1.9.3
+
+### Rails
+
+- 3.1.x or 3.2.x
+
+### ORM
+
+- ActiveRecord
+- Mysql2, MySQL
+- SQLServer
+- PostgreSQL
+
+## Installation
+
+Note that at this time, the gem will support calling stored procedures for Mysql2, MySQL2, SQLServer and PostgreSQL.
+
+In your Gemfile
+
+    gem 'uses-stored-procedures', git => "git://github.com/leopoldodonnell/uses-stored-procedures"
+
+Then from your project root:
+
+    > bundle
+
+
+## Using uses_stored_procedures to call stored procedures from Rails
 
 **UsesStoredProcedues** extends ActiveRecord::Base with the single class method that takes the name of the procedure as a symbol, and optional parameters to generate a class and instance method that can be called to run the stored procedure.
 
@@ -91,15 +121,8 @@ client_list = client_services.list_inactive_clients(first_of_year)
 # and so on ...
 ```
 
-## Installation
+### License
 
-Note that at this time, the gem will support calling stored procedures for Mysql2, MySQL2, SQLServer and PostgreSQL.
+MIT License. Copyright 2013 Leopold O'Donnell
 
-In your Gemfile
-
-    gem 'uses-stored-procedures', git => "git://github.com/leopoldodonnell/uses-stored-procedures"
-
-Then from your project root:
-
-    > bundle
 
