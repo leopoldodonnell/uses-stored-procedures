@@ -21,6 +21,7 @@ group :development do
   gem 'yard'
   gem 'growl'
   gem 'ruby_gntp'
+  gem 'travis-lint'
 end
 
 group :test do

@@ -19,8 +19,7 @@ module UsesStoredProcedures
   #    # > One is 3 and Two is 4
   # 
   class HashWithAttributes < Hash
-    
-    
+       
     def method_missing(name, *args, &block)
       if check_and_create_accessors(name)
         args.length > 0 ? send(name.to_s, args.first) : send(name.to_s)
@@ -36,30 +35,18 @@ module UsesStoredProcedures
     private
       def check_and_create_accessors(name)
         item_name = name.to_s.chomp '='
-
-        if has_key? item_name.to_sym
-          self.class.create_accessors(item_name, true)
-          return true
-        end
-
-        if has_key? item_name
-          self.class.create_accessors(item_name, false)
+        if has_key?(item_name) || has_key?(item_name.to_sym)
+          self.class.create_accessors(item_name)
           return true
         end
         false
       end
       
-      def self.create_accessors(accessor, is_sym)
-        if is_sym
-          # The key is a symbol
-          define_method(accessor)       { fetch __method__ }
-          define_method("#{accessor}=") { |v| store(__method__.to_s.chomp('=').to_sym, v) }
-        else
-          # The key is a string
-          define_method(accessor)       { fetch __method__.to_s }
-          define_method("#{accessor}=") { |v| store(__method__.to_s.chomp('='), v) }
-        end
+      def self.create_accessors(accessor)
+        define_method(accessor)       { fetch accessor }
+        define_method("#{accessor}=") { |v| store(accessor, v) }
         true
       end
-  end    
+  end
+   
 end
