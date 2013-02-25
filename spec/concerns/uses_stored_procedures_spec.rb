@@ -4,21 +4,28 @@ require 'uses_stored_procedures'
 describe "UsesStoredProceduresSpec" do
   before(:all) do
     
-    proc_sql = <<END
-    CREATE PROCEDURE `test_proc` ()
-    BEGIN
-        SELECT * FROM people;
-    END;
+    case ActiveRecord::Base.connection.adapter_name.to_sym
+    when :Mysql2, :MySQL, :SQLServer
+      proc_sql = <<END
+      CREATE PROCEDURE `test_proc` ()
+      BEGIN
+          SELECT * FROM people;
+      END;
 END
 
-    proc_with_params = <<END
-    CREATE PROCEDURE `people_by_name_and_zip` (IN in_name VARCHAR(255), IN zip INTEGER)
-    BEGIN
-        SELECT * FROM people WHERE name like in_name and zip_code = zip;
-    END;
+      proc_with_params = <<END
+      CREATE PROCEDURE `people_by_name_and_zip` (IN in_name VARCHAR(255), IN zip INTEGER)
+      BEGIN
+          SELECT * FROM people WHERE name like in_name and zip_code = zip;
+      END;
 END
+    when :PostgreSQL
+      raise "uses_stored_procedurs does not support your connection adapter"
+    else
+      raise "uses_stored_procedurs does not support your connection adapter"
+    end        
+    
 
-    #ActiveRecord::Base.connection.execute("mysql_options(&mysql, MYSQL_OPT_RECONNECT, &reconnect);")
     ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS people")
     ActiveRecord::Base.connection.execute("DROP PROCEDURE IF EXISTS test_proc")
     ActiveRecord::Base.connection.execute("DROP PROCEDURE IF EXISTS people_by_name_and_zip")

@@ -8,6 +8,10 @@ Extends ActiveRecord with the ability to use SQL Stored Procedures in Rails.
 
 While stored procedures are *not the Rails way* they are an occasional project necessity. Your reasons may stem from a need to integrate with a legacy database with built-in business rules, or a need to improve performance where other avenues have been exhausted (given available project time). If you need this, *you know who you are*, I don't need to tell you why.
 
+## Version
+
+0.1.0
+
 ## Requirements
 
 ### Ruby
@@ -21,9 +25,9 @@ While stored procedures are *not the Rails way* they are an occasional project n
 ### ORM
 
 - ActiveRecord
-- Mysql2, MySQL
-- SQLServer
-- PostgreSQL
+- Mysql2, MySQL (Tested/Passing)
+- SQLServer     (Untested, but should work)
+- PostgreSQL    (Untested, unsure - please try it and notify the author)
 
 ## Installation
 

@@ -7,7 +7,7 @@ env:
   - rails=3.2.9
   - rails=3.1
   - TEST_CONFIG=test
-  - TEST_CONFIG=test_postgres
+  #- TEST_CONFIG=test_postgres
 
 before_script:
   - sh -c "if [ '$TEST_CONFIG' = 'test' ]; then mysql -e 'create database test;' --user=root;  fi"
