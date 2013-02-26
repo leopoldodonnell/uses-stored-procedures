@@ -19,7 +19,23 @@ module UsesStoredProcedures
   #    # > One is 3 and Two is 4
   # 
   class HashWithAttributes < Hash
-       
+    
+    ##
+    # Create a new HashWithAttributes.
+    #
+    # @param [Object] hash_or_obj will initialize the hash
+    # from another hash, or work like Hash where the object
+    # is the default for empty entries.
+    # 
+    def initialize(hash_or_obj = nil)
+      if hash_or_obj && hash_or_obj.kind_of?(Hash)
+        super()
+        self.merge! hash_or_obj
+      else
+        super
+      end
+    end
+         
     def method_missing(name, *args, &block)
       if check_and_create_accessors(name)
         args.length > 0 ? send(name.to_s, args.first) : send(name.to_s)

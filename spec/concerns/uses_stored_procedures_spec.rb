@@ -93,6 +93,7 @@ END
   it "responds from a stored procedure with an array of Hash who's members can be get or set by method name" do
     f = Foo.new
     r = f.test_proc
+
     value = r[0].foo = 'banana'
     value.should == 'banana'
     r[0].foo.should == 'banana'

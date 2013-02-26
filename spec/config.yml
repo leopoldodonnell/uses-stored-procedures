@@ -4,6 +4,12 @@ test:
   username: foobar
   encoding: utf8
 
+test_mysql:
+  adapter: mysql2
+  database: mygem_test
+  username: root
+  encoding: utf8
+  
 test_postgres:
   adapter: postgresql
   database: myapp_test

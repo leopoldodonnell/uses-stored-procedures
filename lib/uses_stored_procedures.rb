@@ -56,7 +56,7 @@ module UsesStoredProcedures
     
     # Define the class and instance methods. Note the need to
     # create a singleton class instance to create the stored
-    # procedure.
+    # procedure class method.
     def install_stored_proc_methods(name, proc_name, call_stored_proc_verb, filter) #:nodoc:
       define_method name do |*args| 
         self.class.exec_stored_proc(proc_name, call_stored_proc_verb, filter, args) 
@@ -66,6 +66,7 @@ module UsesStoredProcedures
       singleton_class.send(:define_method, name) do |*args| 
         exec_stored_proc(proc_name, call_stored_proc_verb, filter, args) 
       end
+
     end
     
     # Run the stored procedure with the arguments provided and send
@@ -89,13 +90,13 @@ module UsesStoredProcedures
         case filter
           when Symbol
             # Map with a member function
-            results.map do |r| self.send(filter.to_s, HashWithAttributes.new.merge(r)) end
+            results.map do |r| self.send(filter.to_s, HashWithAttributes.new(r)) end
           when Proc
             # Map with a block
-            results.map do |r| filter.call(HashWithAttributes.new.merge(r)) end
+            results.map do |r| filter.call(HashWithAttributes.new(r)) end
           else
             # Just map it 
-            results.map do |r| HashWithAttributes.new.merge r end
+            results.map do |r| HashWithAttributes.new r end
         end
       end
     
