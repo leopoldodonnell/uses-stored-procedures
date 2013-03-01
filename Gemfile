@@ -33,6 +33,8 @@ group :test do
   gem "activerecord"
   gem "mysql2"
   gem "ruby-pg"
+  gem 'tiny_tds'
+  gem "activerecord-sqlserver-adapter"
 end
 # To use debugger
 # gem 'debugger'

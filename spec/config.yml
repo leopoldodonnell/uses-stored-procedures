@@ -14,3 +14,11 @@ test_postgres:
   adapter: postgresql
   database: myapp_test
   username: postgres
+
+test_sqlserver:
+  adapter: sqlserver
+  database: guest
+  username: 
+  password: 
+  host: localhost
+  encoding: utf8
