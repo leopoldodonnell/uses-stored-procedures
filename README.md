@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/leopoldodonnell/uses-stored-procedures.png?branch=master)](https://travis-ci.org/leopoldodonnell/uses-stored-procedures)
 [![Dependency Status](https://gemnasium.com/leopoldodonnell/uses-stored-procedures.png)](https://gemnasium.com/leopoldodonnell/uses-stored-procedures)
 [![Code Climate](https://codeclimate.com/github/leopoldodonnell/uses-stored-procedures.png)](https://codeclimate.com/github/leopoldodonnell/uses-stored-procedures)
+[![Gem Version](https://fury-badge.herokuapp.com/rb/uses-store-procedures.png)](http://badge.fury.io/rb/uses-store-procedures)
 
 # UsesStoredProcedures
 
