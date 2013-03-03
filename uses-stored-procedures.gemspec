@@ -5,7 +5,7 @@ require "uses_stored_procedures/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "uses-store-procedures"
+  s.name        = "uses-stored-procedures"
   s.version     = UsesStoreProcedures::VERSION
   s.authors     = ["Leo O'Donnell"]
   s.email       = ["leopold.odonnell@gmail.com"]

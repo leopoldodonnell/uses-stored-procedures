@@ -36,6 +36,10 @@ be tested when time permits. Please contact the author if you've gotten it to wo
 
 In your Gemfile
 
+    gem 'uses-stored-procedures'
+
+Or from the git repo for the bleeding edge (*feel free to star it :-)*)
+
     gem 'uses-stored-procedures', git => "git://github.com/leopoldodonnell/uses-stored-procedures"
 
 Then from your project root:
