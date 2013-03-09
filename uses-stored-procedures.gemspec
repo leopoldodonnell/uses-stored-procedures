@@ -15,7 +15,8 @@ Gem::Specification.new do |s|
     So, you really need to use stored procedures in your Rails application. This gem extends
     ActiveRecord with a class method to add to your models or services.
   EOF
-
+  s.has_rdoc    = 'yard'
+  
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 

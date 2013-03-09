@@ -24,6 +24,8 @@ group :development do
   gem 'growl'
   gem 'ruby_gntp'
   gem 'travis-lint'
+  gem 'redcarpet', "~>2.0"
+  gem 'github-markup'
 end
 
 group :test do

@@ -47,6 +47,10 @@ Then from your project root:
 
     > bundle
 
+To generate the documentation and view it, continue from the project root, then:
+
+    > yard
+    > yard server
 
 ## Using uses_stored_procedures to call stored procedures from Rails
 
