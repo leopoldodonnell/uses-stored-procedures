@@ -1,4 +1,6 @@
 .bundle/
+doc
+.yardoc
 log/*.log
 pkg/
 test/dummy/db/*.sqlite3
