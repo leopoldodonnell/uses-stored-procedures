@@ -7,7 +7,7 @@ env:
   - TEST_CONFIG=test_mysql
 
 gemfile:
-  - Gemfile
+  - gemfiles/Gemfile.rails-3.2.x
   
 before_script:
   - sh -c "if [ '$TEST_CONFIG' = 'test_mysql' ]; then mysql -e 'create database mygem_test;' --user=root;  fi"

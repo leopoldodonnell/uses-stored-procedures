@@ -18,11 +18,6 @@ gem "jquery-rails"
 gem "rspec-rails", :group => [:test, :development]
 
 group :development do
-  gem 'guard'
-  gem 'guard-bundler'
-  gem 'yard'
-  gem 'growl'
-  gem 'ruby_gntp'
   gem 'travis-lint'
 end
 
