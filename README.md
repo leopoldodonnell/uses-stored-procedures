@@ -60,7 +60,7 @@ Here's a simple example:
 
 ```ruby
 class MyClass < ActiveRecord::Base
-  use_stored_proc :get_office_by_country {|row| "#{row.country} #{row.city}, phone: #{row.phone}"}
+  uses_stored_proc :get_office_by_country {|row| "#{row.country} #{row.city}, phone: #{row.phone}"}
 end
 ```
 
@@ -87,10 +87,10 @@ Note that the object passed to the block is a *UsesStoredProcedures#HashWithAttr
 
 ### Syntax
 
-The method signature for *use_stored_proc* is:
+The method signature for *uses_stored_proc* is:
 
 ```ruby
-def self.use_stored_proc(method_name, *options, &block)
+def self.uses_stored_proc(method_name, *options, &block)
 ```
 
 That then generates a class and instance method named *method_name*.
@@ -109,7 +109,7 @@ That then generates a class and instance method named *method_name*.
 
 #### Generated Methods
 
-The generated methods all take a variable number of parameters that are mapped to the stored procedure call and can also take a block that can be used to map the returned rows. By default the returned value will be an array of values that are either instances of *UsesStoredProcedures#HashWithAttributes*, or mapped by the block. Note that passing a block overrides the block or method provided when calling *#use_stored_proc*
+The generated methods all take a variable number of parameters that are mapped to the stored procedure call and can also take a block that can be used to map the returned rows. By default the returned value will be an array of values that are either instances of *UsesStoredProcedures#HashWithAttributes*, or mapped by the block. Note that passing a block overrides the block or method provided when calling *#uses_stored_proc*
 
 ### Another Example
 
@@ -118,9 +118,9 @@ require 'uses_stored_procedures'
 
 class ClientServices
   include UsesStoredProcedures
-  
-  use_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS', :filter => :make_clients
-  
+
+  uses_stored_proc :list_inactive_clients, :proc_name => 'GET_CLIENTS_INACTIVE_STATUS', :filter => :make_clients
+
   def self.make_clients(item)
     Client.new item
   end
