@@ -42,7 +42,7 @@ module UsesStoredProcedures
 
     # Return the SQL verb for calling a stored procedure.
     def call_stored_proc_verb()
-      case ActiveRecord::Base.connection.adapter_name.to_sym
+      case database_connection.adapter_name.to_sym
       when :Mysql2, :MySQL
         'call'
       when :PostgreSQL
@@ -79,13 +79,17 @@ module UsesStoredProcedures
       # are called. Note that testing for ::connected? doesn't work.
       #
       # TODO: investigate why stored procedures cause connection hangups.
-      records = ActiveRecord::Base.connection.select_all(sql)
-      ActiveRecord::Base.connection.reconnect!
+      records = database_connection.select_all(sql)
+      database_connection.reconnect!
 
       filter_stored_proc_results(records, filter)
     end
 
     private
+      def database_connection
+        eval("#{self.name}").connection
+      end
+
       def filter_stored_proc_results(results, filter)
         case filter
           when Symbol
